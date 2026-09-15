@@ -1,6 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchZecSnapshot } from "@/lib/client-snapshot";
 import type { ZecSnapshot } from "@/lib/types";
@@ -14,11 +13,7 @@ export interface LandingLiveState {
   retry: () => void;
 }
 
-interface LandingLiveDataProps {
-  children: (state: LandingLiveState) => ReactNode;
-}
-
-export function LandingLiveData({ children }: LandingLiveDataProps) {
+export function useLandingLiveData(): LandingLiveState {
   const [snapshot, setSnapshot] = useState<ZecSnapshot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -62,5 +57,5 @@ export function LandingLiveData({ children }: LandingLiveDataProps) {
     void loadSnapshot();
   }, [loadSnapshot, snapshot]);
 
-  return children({ snapshot, error, isLoading, retry });
+  return { snapshot, error, isLoading, retry };
 }
