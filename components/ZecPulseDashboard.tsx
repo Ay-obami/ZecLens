@@ -1,16 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { fetchZecSnapshot } from "@/lib/client-snapshot";
 import type { ZecSnapshot } from "@/lib/types";
 import { BlockHeartbeat } from "./BlockHeartbeat";
 import { LatestBlockImpact } from "./LatestBlockImpact";
 import { MempoolPulse } from "./MempoolPulse";
 import { NetworkHealth } from "./NetworkHealth";
 import { PrivacyPulse } from "./PrivacyPulse";
-
-type SnapshotResponse =
-  | { data: ZecSnapshot }
-  | { error: { code: string; message: string } };
 
 const POLL_INTERVAL_MS = 10_000;
 const BLOCK_PULSE_MS = 1_200;
@@ -25,18 +23,8 @@ export function ZecPulseDashboard() {
 
   const loadSnapshot = useCallback(async () => {
     try {
-      const response = await fetch("/api/zcash/snapshot", { cache: "no-store" });
-      const payload = (await response.json()) as SnapshotResponse;
+      const next = await fetchZecSnapshot();
 
-      if (!response.ok || !("data" in payload)) {
-        const message =
-          "error" in payload
-            ? payload.error.message
-            : "Live Zcash data is unavailable.";
-        throw new Error(message);
-      }
-
-      const next = payload.data;
       if (previousHash.current && previousHash.current !== next.block.hash) {
         setNewBlock(true);
         if (pulseTimer.current) clearTimeout(pulseTimer.current);
@@ -71,6 +59,7 @@ export function ZecPulseDashboard() {
   if (!snapshot && isLoading) {
     return (
       <main className="shell">
+        <DashboardHomeLink />
         <Hero live={false} />
         <div className="dashboard-grid" aria-label="Loading live Zcash data">
           {Array.from({ length: 4 }, (_, index) => (
@@ -88,6 +77,7 @@ export function ZecPulseDashboard() {
   if (!snapshot) {
     return (
       <main className="shell">
+        <DashboardHomeLink />
         <Hero live={false} />
         <section className="card error-card" role="alert">
           <p className="eyebrow">Connection status</p>
@@ -107,6 +97,7 @@ export function ZecPulseDashboard() {
 
   return (
     <main className="shell">
+      <DashboardHomeLink />
       <Hero live={!error} />
 
       {error ? (
@@ -137,13 +128,25 @@ export function ZecPulseDashboard() {
       <LatestBlockImpact pools={snapshot.pools} />
 
       <footer className="site-footer">
-        <span>Five live Zebra RPC methods</span>
+        <span>Five live RPC methods</span>
         <span aria-hidden="true">·</span>
         <span>Refreshes every 10 seconds</span>
         <span aria-hidden="true">·</span>
-        <span>Remote RPC via Tatum</span>
+        <span>Live Zcash mainnet</span>
       </footer>
     </main>
+  );
+}
+
+function DashboardHomeLink() {
+  return (
+    <Link
+      href="/"
+      className="status-badge"
+      style={{ marginBottom: 18, textDecoration: "none" }}
+    >
+      <span aria-hidden="true">←</span> Back to ZecPulse
+    </Link>
   );
 }
 
@@ -161,7 +164,7 @@ function Hero({ live }: { live: boolean }) {
           </div>
         </div>
         <p className="hero-copy">
-          A live mainnet pulse built directly from Zebra JSON-RPC data.
+          A live view of Zcash mainnet activity, health, privacy, and network flow.
         </p>
       </div>
       <div
@@ -173,7 +176,7 @@ function Hero({ live }: { live: boolean }) {
         <span className={`live-dot${live ? " is-live" : ""}`} aria-hidden="true" />
         <div>
           <strong>Zcash Mainnet — {live ? "Live" : "Connecting"}</strong>
-          <span>Powered by Zebra RPC</span>
+          <span>Live Zcash mainnet telemetry</span>
         </div>
       </div>
     </header>
