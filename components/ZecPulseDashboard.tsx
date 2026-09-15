@@ -1,16 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { fetchZecSnapshot } from "@/lib/client-snapshot";
 import type { ZecSnapshot } from "@/lib/types";
 import { BlockHeartbeat } from "./BlockHeartbeat";
 import { LatestBlockImpact } from "./LatestBlockImpact";
 import { MempoolPulse } from "./MempoolPulse";
 import { NetworkHealth } from "./NetworkHealth";
 import { PrivacyPulse } from "./PrivacyPulse";
-
-type SnapshotResponse =
-  | { data: ZecSnapshot }
-  | { error: { code: string; message: string } };
 
 const POLL_INTERVAL_MS = 10_000;
 const BLOCK_PULSE_MS = 1_200;
@@ -25,18 +22,8 @@ export function ZecPulseDashboard() {
 
   const loadSnapshot = useCallback(async () => {
     try {
-      const response = await fetch("/api/zcash/snapshot", { cache: "no-store" });
-      const payload = (await response.json()) as SnapshotResponse;
+      const next = await fetchZecSnapshot();
 
-      if (!response.ok || !("data" in payload)) {
-        const message =
-          "error" in payload
-            ? payload.error.message
-            : "Live Zcash data is unavailable.";
-        throw new Error(message);
-      }
-
-      const next = payload.data;
       if (previousHash.current && previousHash.current !== next.block.hash) {
         setNewBlock(true);
         if (pulseTimer.current) clearTimeout(pulseTimer.current);
