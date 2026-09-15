@@ -1,8 +1,22 @@
 # ZecPulse
 
-ZecPulse is a focused live dashboard for the Zcash Mini Build Challenge. It connects to Zcash mainnet through a remote **Zebra (zebrad) JSON-RPC** gateway and turns raw node responses into a readable network pulse: latest block activity, node health, mempool activity, ZEC value-pool distribution, and per-block pool movement.
+ZecPulse is a live Zcash network observatory built for the Zcash Mini Build Challenge. It turns raw Zcash mainnet node responses into a polished product experience: a public landing page with live network proof and a dedicated dashboard for block activity, node health, mempool activity, ZEC value-pool distribution, and per-block pool movement.
 
-The project deliberately stays small: no wallet, database, login, or transaction flow. The goal is to make the live Zcash network visibly come through the screen.
+The project deliberately stays focused: no wallet, database, login, or transaction flow. The goal is to make the live Zcash network understandable at a glance while keeping the underlying RPC integration visible and verifiable.
+
+## Product experience
+
+ZecPulse now has two user-facing surfaces:
+
+```text
+/                     Product landing page with cached live mainnet teaser
+/dashboard            Full live Zcash network observatory
+/api/zcash/snapshot   Server-side normalized snapshot endpoint
+```
+
+The landing page introduces the product, shows current block height, Zebra version, peers, mempool activity, privacy-pool distribution, and the five RPC methods behind the experience. The dashboard remains the dense live telemetry view and refreshes every 10 seconds.
+
+Both surfaces use the same cached server snapshot, so the landing page does not create a second independent burst of remote RPC traffic.
 
 ## What it does
 
@@ -12,14 +26,15 @@ The project deliberately stays small: no wallet, database, login, or transaction
 - Visualizes Transparent, Sprout, Sapling, Orchard, Lockbox, and Ironwood balances.
 - Calculates the shielded share of supply using **Sprout + Sapling + Orchard + Ironwood**. Transparent and Lockbox are intentionally excluded.
 - Shows non-zero value-pool deltas reported by the latest block.
-- Polls every 10 seconds while the server caches snapshots for 15 seconds to reduce remote RPC usage.
+- Polls the dashboard every 10 seconds and the landing page every 15 seconds while the server caches snapshots for 15 seconds.
 - Retains the last successful snapshot if a later refresh temporarily fails.
+- Keeps the landing page usable when live data is temporarily unavailable.
 
 ## Live features
 
-The landing page is the application itself. When the RPC connection is configured, visitors immediately see live Zcash mainnet data rather than static demo content.
+The landing page immediately proves the application is connected to Zcash mainnet with live block, node, peer, mempool, and privacy data. Visitors can then open `/dashboard` for the full network observatory.
 
-A new block hash triggers a short heartbeat pulse. The page also makes the data source explicit with **Zcash Mainnet — Live** and **Powered by Zebra RPC** status text.
+A new block hash triggers a short heartbeat pulse in the dashboard. Live status, retry handling, stale-data retention, and graceful unavailable states keep the interface useful during transient RPC failures.
 
 ## Architecture
 
@@ -94,35 +109,29 @@ Do not commit `.env.local` or paste your real key into source files.
 npm run dev
 ```
 
-Open:
+Open the product landing page:
 
 ```text
 http://localhost:3000
+```
+
+Open the full observatory directly:
+
+```text
+http://localhost:3000/dashboard
 ```
 
 The first uncached snapshot can take a little over a second because the server deliberately stages the five remote RPC calls to respect the free provider's request rate.
 
 ## Testing
 
-Run the unit suite:
-
 ```bash
 npm test
-```
-
-Run lint:
-
-```bash
 npm run lint
-```
-
-Run a production build:
-
-```bash
 npm run build
 ```
 
-The tests cover privacy calculations, sync normalization, mempool activity, secure RPC configuration/transport, five-method snapshot normalization, snapshot caching, and safe API error responses.
+The tests cover privacy calculations, sync normalization, mempool activity, secure RPC configuration/transport, client snapshot transport, five-method snapshot normalization, snapshot caching, safe API errors, route structure, and landing-page metric helpers.
 
 ## Security notes
 
@@ -136,26 +145,36 @@ The tests cover privacy calculations, sync normalization, mempool activity, secu
 
 | Requirement | ZecPulse |
 | --- | --- |
-| Landing page | Live single-page network dashboard |
-| Connect to a Zcash node | Remote Tatum gateway backed by Zebra |
+| Landing page | Dedicated responsive product landing page with live mainnet teaser |
+| Connect to a Zcash node | Remote gateway backed by Zebra |
 | Use at least 3 RPC methods | Uses 5 verified Zebra RPC methods |
-| Display live blockchain data | Blocks, node/network, mempool, supply/value pools, sync state |
+| Display live blockchain data | Landing teaser plus full block, network, mempool, supply/value-pool, and sync telemetry |
 
 ## Project structure
 
 ```text
 app/
   api/zcash/snapshot/route.ts   Safe server API
-  globals.css                   Responsive dashboard styles
+  dashboard/page.tsx            Full live network observatory route
+  globals.css                   Shared dashboard/global styles
   layout.tsx                    Metadata/root layout
-  page.tsx                      Landing page
-components/                     Live dashboard cards and polling UI
+  page.tsx                      Product landing route
+components/
+  landing/                      Responsive landing-page sections and live teaser
+  ZecPulseDashboard.tsx         Dashboard polling/product shell
+  BlockHeartbeat.tsx            Latest block telemetry
+  NetworkHealth.tsx             Node/network health
+  MempoolPulse.tsx              Mempool telemetry
+  PrivacyPulse.tsx              Dashboard privacy distribution
+  LatestBlockImpact.tsx         Latest-block value-pool movement
 lib/
+  client-snapshot.ts            Shared browser snapshot transport
+  landing-metrics.ts            Landing freshness/pool helpers
   metrics.ts                    Derived privacy/sync/mempool helpers
   snapshot.ts                   RPC orchestration + normalization + cache
   types.ts                      Stable snapshot/upstream types
   zebra-rpc.ts                  Secure JSON-RPC transport
-tests/                          Unit tests
+tests/                          Unit and route-structure tests
 ```
 
 ## Submission status

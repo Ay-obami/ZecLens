@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchZecSnapshot } from "@/lib/client-snapshot";
 import type { ZecSnapshot } from "@/lib/types";
@@ -58,6 +59,7 @@ export function ZecPulseDashboard() {
   if (!snapshot && isLoading) {
     return (
       <main className="shell">
+        <DashboardHomeLink />
         <Hero live={false} />
         <div className="dashboard-grid" aria-label="Loading live Zcash data">
           {Array.from({ length: 4 }, (_, index) => (
@@ -75,6 +77,7 @@ export function ZecPulseDashboard() {
   if (!snapshot) {
     return (
       <main className="shell">
+        <DashboardHomeLink />
         <Hero live={false} />
         <section className="card error-card" role="alert">
           <p className="eyebrow">Connection status</p>
@@ -94,6 +97,7 @@ export function ZecPulseDashboard() {
 
   return (
     <main className="shell">
+      <DashboardHomeLink />
       <Hero live={!error} />
 
       {error ? (
@@ -128,9 +132,21 @@ export function ZecPulseDashboard() {
         <span aria-hidden="true">·</span>
         <span>Refreshes every 10 seconds</span>
         <span aria-hidden="true">·</span>
-        <span>Remote RPC via Tatum</span>
+        <span>Live Zcash mainnet</span>
       </footer>
     </main>
+  );
+}
+
+function DashboardHomeLink() {
+  return (
+    <Link
+      href="/"
+      className="status-badge"
+      style={{ marginBottom: 18, textDecoration: "none" }}
+    >
+      <span aria-hidden="true">←</span> Back to ZecPulse
+    </Link>
   );
 }
 
