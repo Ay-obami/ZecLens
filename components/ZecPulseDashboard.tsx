@@ -128,7 +128,7 @@ export function ZecPulseDashboard() {
       <LatestBlockImpact pools={snapshot.pools} />
 
       <footer className="site-footer">
-        <span>Five live Zebra RPC methods</span>
+        <span>Five live RPC methods</span>
         <span aria-hidden="true">·</span>
         <span>Refreshes every 10 seconds</span>
         <span aria-hidden="true">·</span>
@@ -164,7 +164,7 @@ function Hero({ live }: { live: boolean }) {
           </div>
         </div>
         <p className="hero-copy">
-          A live mainnet pulse built directly from Zebra JSON-RPC data.
+          A live view of Zcash mainnet activity, health, privacy, and network flow.
         </p>
       </div>
       <div
@@ -176,7 +176,7 @@ function Hero({ live }: { live: boolean }) {
         <span className={`live-dot${live ? " is-live" : ""}`} aria-hidden="true" />
         <div>
           <strong>Zcash Mainnet — {live ? "Live" : "Connecting"}</strong>
-          <span>Powered by Zebra RPC</span>
+          <span>Live Zcash mainnet telemetry</span>
         </div>
       </div>
     </header>
