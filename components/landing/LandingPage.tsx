@@ -1,14 +1,29 @@
-import Link from "next/link";
+"use client";
+
+import { HeroSection } from "./HeroSection";
+import { LandingLiveData } from "./LandingLiveData";
+import { LiveMetricsStrip } from "./LiveMetricsStrip";
+import { PrivacyOverview } from "./PrivacyOverview";
 
 export function LandingPage() {
   return (
-    <main>
-      <section aria-labelledby="zecpulse-title">
-        <p>Zcash network observatory</p>
-        <h1 id="zecpulse-title">ZecPulse</h1>
-        <p>Live Zcash mainnet intelligence for blocks, peers, mempool activity, network health, and privacy pools.</p>
-        <Link href="/dashboard">Open Live Dashboard</Link>
-      </section>
-    </main>
+    <LandingLiveData>
+      {({ snapshot, error, isLoading, retry }) => (
+        <main>
+          <HeroSection
+            snapshot={snapshot}
+            isLive={Boolean(snapshot && !error)}
+            isLoading={isLoading}
+          />
+          <LiveMetricsStrip
+            snapshot={snapshot}
+            error={error}
+            isLoading={isLoading}
+            onRetry={retry}
+          />
+          <PrivacyOverview snapshot={snapshot} isLoading={isLoading} />
+        </main>
+      )}
+    </LandingLiveData>
   );
 }
