@@ -1,3 +1,5 @@
+import { ZecPulseDashboard } from "@/components/ZecPulseDashboard";
+
 export default function Home() {
-  return <main>ZecPulse</main>;
+  return <ZecPulseDashboard />;
 }
