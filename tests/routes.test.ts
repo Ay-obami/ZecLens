@@ -53,5 +53,6 @@ describe("product routes", () => {
       "A live mainnet pulse built directly from Zebra JSON-RPC data.",
     );
     expect(dashboard).not.toContain("Powered by Zebra RPC");
+    expect(dashboard).not.toContain("Zebra RPC");
   });
 });
