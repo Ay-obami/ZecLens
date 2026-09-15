@@ -15,4 +15,24 @@ describe("product routes", () => {
       "ZecPulseDashboard",
     );
   });
+
+  it("includes the approved product-story sections", async () => {
+    const landing = await source("components/landing/LandingPage.tsx");
+
+    for (const component of [
+      "SiteHeader",
+      "HeroSection",
+      "LiveMetricsStrip",
+      "FeatureGrid",
+      "PrivacyOverview",
+      "HowZecPulseHelps",
+      "TechnicalProof",
+      "FinalCta",
+      "SiteFooter",
+    ]) {
+      expect(landing).toContain(component);
+    }
+
+    expect(landing).not.toContain("Built directly on Zebra RPC");
+  });
 });
