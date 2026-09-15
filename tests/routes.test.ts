@@ -35,4 +35,10 @@ describe("product routes", () => {
 
     expect(landing).not.toContain("Built directly on Zebra RPC");
   });
+
+  it("links the dashboard back to the product landing page", async () => {
+    const dashboard = await source("components/ZecPulseDashboard.tsx");
+    expect(dashboard).toContain('href="/"');
+    expect(dashboard).toContain("Back to ZecPulse");
+  });
 });
