@@ -1,5 +1,5 @@
-import { ZecPulseDashboard } from "@/components/ZecPulseDashboard";
+import { LandingPage } from "@/components/landing/LandingPage";
 
 export default function Home() {
-  return <ZecPulseDashboard />;
+  return <LandingPage />;
 }
