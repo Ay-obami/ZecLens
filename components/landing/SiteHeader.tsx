@@ -4,9 +4,9 @@ import styles from "./LandingPage.module.css";
 export function SiteHeader({ isLive }: { isLive: boolean }) {
   return (
     <header className={styles.siteHeader}>
-      <Link className={styles.brand} href="/" aria-label="ZecPulse home">
+      <Link className={styles.brand} href="/" aria-label="ZecLens home">
         <span className={styles.brandMark} aria-hidden="true">Z</span>
-        <span>ZecPulse</span>
+        <span>ZecLens</span>
       </Link>
 
       <nav className={styles.desktopNav} aria-label="Primary navigation">

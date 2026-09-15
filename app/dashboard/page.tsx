@@ -1,5 +1,5 @@
-import { ZecPulseDashboard } from "@/components/ZecPulseDashboard";
+import { ZecLensDashboard } from "@/components/ZecLensDashboard";
 
 export default function DashboardPage() {
-  return <ZecPulseDashboard />;
+  return <ZecLensDashboard />;
 }

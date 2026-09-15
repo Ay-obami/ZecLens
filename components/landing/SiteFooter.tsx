@@ -6,11 +6,11 @@ export function SiteFooter() {
     <footer className={styles.siteFooter}>
       <Link className={styles.footerBrand} href="/">
         <span className={styles.footerMark} aria-hidden="true">Z</span>
-        ZecPulse
+        ZecLens
       </Link>
       <p>Built for the Zcash Mini Build Challenge · Live Zcash data via Zebra RPC</p>
       <a
-        href="https://github.com/Ay-obami/ZecPulse"
+        href="https://github.com/Ay-obami/ZecLens"
         target="_blank"
         rel="noreferrer"
       >

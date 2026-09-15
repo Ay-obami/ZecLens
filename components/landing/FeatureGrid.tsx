@@ -24,13 +24,13 @@ const features = [
 
 export function FeatureGrid() {
   return (
-    <section id="how-it-works" className={styles.section} aria-labelledby="reveals-title">
+    <section id="how-it-works" className={`${styles.section} ${styles.featureSection}`} aria-labelledby="reveals-title">
       <div className={styles.sectionHeading}>
         <div>
-          <p className={styles.eyebrow}>What ZecPulse reveals</p>
+          <p className={styles.eyebrow}>What ZecLens reveals</p>
           <h2 id="reveals-title">Network signal without the noise.</h2>
         </div>
-        <p>From blocks to privacy pools, ZecPulse turns live node data into a readable picture of the network.</p>
+        <p>From blocks to privacy pools, ZecLens turns live node data into a readable picture of the network.</p>
       </div>
 
       <div className={styles.cardGrid}>

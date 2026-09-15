@@ -13,7 +13,7 @@ import { PrivacyPulse } from "./PrivacyPulse";
 const POLL_INTERVAL_MS = 10_000;
 const BLOCK_PULSE_MS = 1_200;
 
-export function ZecPulseDashboard() {
+export function ZecLensDashboard() {
   const [snapshot, setSnapshot] = useState<ZecSnapshot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -145,7 +145,7 @@ function DashboardHomeLink() {
       className="status-badge"
       style={{ marginBottom: 18, textDecoration: "none" }}
     >
-      <span aria-hidden="true">←</span> Back to ZecPulse
+      <span aria-hidden="true">←</span> Back to ZecLens
     </Link>
   );
 }
@@ -160,7 +160,7 @@ function Hero({ live }: { live: boolean }) {
           </div>
           <div>
             <p className="eyebrow">Zcash network observatory</p>
-            <h1>ZecPulse</h1>
+            <h1>ZecLens</h1>
           </div>
         </div>
         <p className="hero-copy">

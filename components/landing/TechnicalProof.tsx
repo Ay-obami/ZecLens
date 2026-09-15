@@ -15,7 +15,7 @@ export function TechnicalProof() {
         <p className={styles.eyebrow}>RPC stack</p>
         <h2 id="rpc-title">Five live methods. One clear pulse.</h2>
         <p className={styles.technicalCopy}>
-          Every ZecPulse snapshot is assembled from live Zcash node data and normalized into a stable view for the interface.
+          Every ZecLens snapshot is assembled from live Zcash node data and normalized into a stable view for the interface.
         </p>
       </div>
       <div className={styles.methodList} aria-label="Live Zcash RPC methods">

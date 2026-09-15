@@ -12,7 +12,7 @@ describe("product routes", () => {
 
   it("renders the live observatory at /dashboard", async () => {
     expect(await source("app/dashboard/page.tsx")).toContain(
-      "ZecPulseDashboard",
+      "ZecLensDashboard",
     );
   });
 
@@ -25,7 +25,7 @@ describe("product routes", () => {
       "LiveMetricsStrip",
       "FeatureGrid",
       "PrivacyOverview",
-      "HowZecPulseHelps",
+      "HowZecLensHelps",
       "TechnicalProof",
       "FinalCta",
       "SiteFooter",
@@ -37,22 +37,28 @@ describe("product routes", () => {
   });
 
   it("links the dashboard back to the product landing page", async () => {
-    const dashboard = await source("components/ZecPulseDashboard.tsx");
+    const dashboard = await source("components/ZecLensDashboard.tsx");
     expect(dashboard).toContain('href="/"');
-    expect(dashboard).toContain("Back to ZecPulse");
+    expect(dashboard).toContain("Back to ZecLens");
   });
 
-  it("keeps dashboard hero copy product-focused", async () => {
-    const dashboard = await source("components/ZecPulseDashboard.tsx");
-
+  it("keeps dashboard messaging product-focused", async () => {
+    const dashboard = await source("components/ZecLensDashboard.tsx");
     expect(dashboard).toContain(
       "A live view of Zcash mainnet activity, health, privacy, and network flow.",
     );
     expect(dashboard).toContain("Live Zcash mainnet telemetry");
-    expect(dashboard).not.toContain(
-      "A live mainnet pulse built directly from Zebra JSON-RPC data.",
-    );
+    expect(dashboard).not.toContain("built directly from Zebra JSON-RPC data");
     expect(dashboard).not.toContain("Powered by Zebra RPC");
-    expect(dashboard).not.toContain("Zebra RPC");
+  });
+
+  it("uses the ZecLens product name", async () => {
+    const dashboard = await source("components/ZecLensDashboard.tsx");
+    const header = await source("components/landing/SiteHeader.tsx");
+    const footer = await source("components/landing/SiteFooter.tsx");
+
+    expect(dashboard).toContain("ZecLens");
+    expect(header).toContain("ZecLens");
+    expect(footer).toContain("ZecLens");
   });
 });

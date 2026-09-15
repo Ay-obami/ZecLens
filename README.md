@@ -1,8 +1,8 @@
-# ZecPulse
+# ZecLens
 
 **See Zcash move in real time.**
 
-ZecPulse is a live Zcash mainnet observatory built for the **Zcash Mini Build Challenge**. It connects to a remote Zcash node, uses five live RPC methods, and turns raw node responses into a readable view of blocks, peers, mempool activity, network health, synchronization, supply, and Zcash privacy pools.
+ZecLens is a live Zcash mainnet observatory built for the **Zcash Mini Build Challenge**. It connects to a remote Zcash node, uses five live RPC methods, and turns raw node responses into a readable view of blocks, peers, mempool activity, network health, synchronization, supply, and Zcash privacy pools.
 
 ## Live demo
 
@@ -13,7 +13,7 @@ The landing page itself displays live Zcash mainnet data, while `/dashboard` pro
 
 ## Challenge requirements
 
-| Requirement | ZecPulse |
+| Requirement | ZecLens |
 | --- | --- |
 | Landing page | ✅ Dedicated responsive landing page with live mainnet telemetry |
 | Connect to a Zcash node | ✅ Remote Zcash mainnet node backed by Zebra |
@@ -22,7 +22,7 @@ The landing page itself displays live Zcash mainnet data, while `/dashboard` pro
 
 ## RPC methods used
 
-ZecPulse uses five live Zcash RPC methods:
+ZecLens uses five live Zcash RPC methods:
 
 | RPC method | Used for |
 | --- | --- |
@@ -34,7 +34,7 @@ ZecPulse uses five live Zcash RPC methods:
 
 ## What it shows live
 
-ZecPulse displays:
+ZecLens displays:
 
 - latest block height
 - latest block hash
@@ -56,7 +56,7 @@ ZecPulse displays:
 
 ## Product experience
 
-ZecPulse has two user-facing surfaces:
+ZecLens has two user-facing surfaces:
 
 ```text
 /                     Product landing page with cached live mainnet telemetry
@@ -134,8 +134,8 @@ The landing page polls every 15 seconds and the full dashboard polls every 10 se
 Clone and install:
 
 ```bash
-git clone https://github.com/Ay-obami/ZecPulse.git
-cd ZecPulse
+git clone https://github.com/Ay-obami/ZecLens.git
+cd ZecLens
 npm install
 cp .env.example .env.local
 ```
@@ -187,6 +187,6 @@ The test suite covers privacy calculations, sync normalization, mempool activity
 
 ## Why this project
 
-The challenge is about proving that an application can talk to the Zcash network and make the result visible. ZecPulse keeps that goal focused: it uses five live RPC methods and turns the responses into an understandable view of what Zcash mainnet is doing right now instead of simply dumping raw JSON onto a page.
+The challenge is about proving that an application can talk to the Zcash network and make the result visible. ZecLens keeps that goal focused: it uses five live RPC methods and turns the responses into an understandable view of what Zcash mainnet is doing right now instead of simply dumping raw JSON onto a page.
 
 Built for the **Zcash Mini Build Challenge — September 2026**.

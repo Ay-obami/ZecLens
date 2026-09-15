@@ -18,12 +18,12 @@ const benefits = [
   },
 ];
 
-export function HowZecPulseHelps() {
+export function HowZecLensHelps() {
   return (
-    <section className={styles.section} aria-labelledby="helps-title">
+    <section className={`${styles.section} ${styles.helpsSection}`} aria-labelledby="helps-title">
       <div className={styles.sectionHeading}>
         <div>
-          <p className={styles.eyebrow}>How ZecPulse helps</p>
+          <p className={styles.eyebrow}>How ZecLens helps</p>
           <h2 id="helps-title">Turn network data into clarity.</h2>
         </div>
         <p>A focused observatory for understanding what Zcash is doing right now.</p>

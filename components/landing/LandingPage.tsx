@@ -3,7 +3,7 @@
 import { FeatureGrid } from "./FeatureGrid";
 import { FinalCta } from "./FinalCta";
 import { HeroSection } from "./HeroSection";
-import { HowZecPulseHelps } from "./HowZecPulseHelps";
+import { HowZecLensHelps } from "./HowZecLensHelps";
 import { useLandingLiveData } from "./LandingLiveData";
 import { LiveMetricsStrip } from "./LiveMetricsStrip";
 import { PrivacyOverview } from "./PrivacyOverview";
@@ -30,7 +30,7 @@ export function LandingPage() {
           />
           <FeatureGrid />
           <PrivacyOverview snapshot={snapshot} isLoading={isLoading} />
-          <HowZecPulseHelps />
+          <HowZecLensHelps />
           <TechnicalProof />
           <FinalCta />
         </main>

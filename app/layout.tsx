@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ZecPulse — Live Zcash Network Pulse",
+  title: "ZecLens — Live Zcash Network Observatory",
   description:
     "Live Zcash mainnet intelligence for blocks, peers, mempool activity, network health, and privacy pools.",
 };

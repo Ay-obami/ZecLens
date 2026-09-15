@@ -35,7 +35,7 @@ export function PrivacyOverview({ snapshot, isLoading }: PrivacyOverviewProps) {
           <p className={styles.eyebrow}>Privacy pools</p>
           <h2 id="privacy-pools-title">See where ZEC lives.</h2>
         </div>
-        <p>Zcash supports transparent and shielded value flows. ZecPulse makes that distribution visible as the network changes.</p>
+        <p>Zcash supports transparent and shielded value flows. ZecLens makes that distribution visible as the network changes.</p>
       </div>
 
       <div className={styles.privacyLayout}>
@@ -56,7 +56,7 @@ export function PrivacyOverview({ snapshot, isLoading }: PrivacyOverviewProps) {
             <span className={styles.privacyGlyph} aria-hidden="true">◈</span>
             <div>
               <h3>Privacy by design.</h3>
-              <p>ZecPulse makes Zcash&apos;s mix of transparent, shielded, and locked value easier to understand at a glance.</p>
+              <p>ZecLens makes Zcash&apos;s mix of transparent, shielded, and locked value easier to understand at a glance.</p>
             </div>
           </div>
         </div>
