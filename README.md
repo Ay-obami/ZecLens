@@ -6,8 +6,8 @@ ZecLens is a live Zcash mainnet observatory built for the **Zcash Mini Build Cha
 
 ## Live demo
 
-- **Landing page:** https://zec-pulse-snowy.vercel.app/
-- **Full network observatory:** https://zec-pulse-snowy.vercel.app/dashboard
+- **Landing page:** https://zec-lens.vercel.app/
+- **Full network observatory:** https://zec-lens.vercel.app/dashboard
 
 The landing page itself displays live Zcash mainnet data, while `/dashboard` provides the full observatory.
 
