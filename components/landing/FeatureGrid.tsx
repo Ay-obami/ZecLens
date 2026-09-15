@@ -24,7 +24,7 @@ const features = [
 
 export function FeatureGrid() {
   return (
-    <section id="how-it-works" className={`${styles.section} ${styles.featureSection}`} aria-labelledby="reveals-title">
+    <section id="how-it-works" className={styles.section} aria-labelledby="reveals-title">
       <div className={styles.sectionHeading}>
         <div>
           <p className={styles.eyebrow}>What ZecPulse reveals</p>

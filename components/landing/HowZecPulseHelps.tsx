@@ -20,7 +20,7 @@ const benefits = [
 
 export function HowZecPulseHelps() {
   return (
-    <section className={`${styles.section} ${styles.helpsSection}`} aria-labelledby="helps-title">
+    <section className={styles.section} aria-labelledby="helps-title">
       <div className={styles.sectionHeading}>
         <div>
           <p className={styles.eyebrow}>How ZecPulse helps</p>

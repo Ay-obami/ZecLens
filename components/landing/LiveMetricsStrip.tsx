@@ -21,7 +21,7 @@ export function LiveMetricsStrip({
   onRetry,
 }: LiveMetricsStripProps) {
   const unavailable = !snapshot && !isLoading;
-  const fallback = unavailable ? "Unavailable" : "—";
+  const fallback = unavailable ? "Live data temporarily unavailable" : "—";
 
   const metrics = [
     {
@@ -69,7 +69,11 @@ export function LiveMetricsStrip({
             <span className={styles.metricIcon} aria-hidden="true">{metric.icon}</span>
             <div>
               <dt>{metric.label}</dt>
-              <dd>{metric.value}</dd>
+              <dd
+                style={unavailable ? { whiteSpace: "normal", fontSize: "0.76rem", lineHeight: 1.35 } : undefined}
+              >
+                {metric.value}
+              </dd>
             </div>
           </div>
         ))}
