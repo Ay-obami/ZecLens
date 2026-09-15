@@ -41,4 +41,17 @@ describe("product routes", () => {
     expect(dashboard).toContain('href="/"');
     expect(dashboard).toContain("Back to ZecPulse");
   });
+
+  it("keeps dashboard hero copy product-focused", async () => {
+    const dashboard = await source("components/ZecPulseDashboard.tsx");
+
+    expect(dashboard).toContain(
+      "A live view of Zcash mainnet activity, health, privacy, and network flow.",
+    );
+    expect(dashboard).toContain("Live Zcash mainnet telemetry");
+    expect(dashboard).not.toContain(
+      "A live mainnet pulse built directly from Zebra JSON-RPC data.",
+    );
+    expect(dashboard).not.toContain("Powered by Zebra RPC");
+  });
 });
