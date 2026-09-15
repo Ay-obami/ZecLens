@@ -7,7 +7,7 @@ export function MempoolPulse({
   mempool: ZecSnapshot["mempool"];
 }) {
   return (
-    <section className="card" aria-labelledby="mempool-title">
+    <section className="card mempool-card" aria-labelledby="mempool-title">
       <div className="card-heading">
         <div>
           <p className="eyebrow">Mempool pulse</p>

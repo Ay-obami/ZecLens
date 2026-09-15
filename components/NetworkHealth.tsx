@@ -11,7 +11,7 @@ export function NetworkHealth({
   const synced = chain.syncPercent >= 99.99;
 
   return (
-    <section className="card" aria-labelledby="network-title">
+    <section className="card network-card" aria-labelledby="network-title">
       <div className="card-heading">
         <div>
           <p className="eyebrow">Network health</p>
