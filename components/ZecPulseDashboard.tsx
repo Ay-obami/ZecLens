@@ -58,10 +58,11 @@ export function ZecPulseDashboard() {
   }, []);
 
   useEffect(() => {
-    void loadSnapshot();
+    const initialLoad = setTimeout(() => void loadSnapshot(), 0);
     const interval = setInterval(() => void loadSnapshot(), POLL_INTERVAL_MS);
 
     return () => {
+      clearTimeout(initialLoad);
       clearInterval(interval);
       if (pulseTimer.current) clearTimeout(pulseTimer.current);
     };
